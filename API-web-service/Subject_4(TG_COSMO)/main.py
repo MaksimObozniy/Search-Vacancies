@@ -1,16 +1,21 @@
 import requests
 import os
 
+def download_images():
+    
+    file_name = "hubble.jpeg"
+    
+    url = input()
+    folder_name = input()
+    os.makedirs(folder_name, exist_ok=True)
 
-file_name = "hubble.jpeg"
-url = "https://upload.wikimedia.org/wikipedia/commons/3/3f/HST-SM4.jpeg"
+    file_path = os.path.join(folder_name, file_name)
+    
+    response = requests.get(url)
+    response.raise_for_status()
 
-folder_name = "images"
-os.makedirs(folder_name, exist_ok=True)
+    with open(file_path, 'wb') as file:
+        file.write(response.content)
 
-file_path = os.path.join(folder_name, file_name)
-response = requests.get(url)
-response.raise_for_status()
-
-with open(file_path, 'wb') as file:
-    file.write(response.content)
+if __name__ == "__main__":
+    download_images()
