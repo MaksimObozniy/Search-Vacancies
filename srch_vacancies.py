@@ -1,10 +1,7 @@
 import requests
 import os
+from dotenv import load_dotenv
 from terminaltables import AsciiTable
-
-
-
-API_KEY = os.getenv('API_KEY') 
 
 
 def predict_rub_salary_hh(vacancy):
@@ -73,7 +70,7 @@ def predict_rub_salary_sj(vacancy):
 
 def get_sj_vacancies(language):
     url = "https://api.superjob.ru/2.0/vacancies/"
-    headers = {"X-Api-App-Id": API_KEY}
+    headers = {"X-Api-App-Id": api_key}
     page = 0
     all_vacancies = []
 
@@ -128,6 +125,9 @@ def print_table(title, results):
 
 
 if __name__ == '__main__':
+    load_dotenv()
+    api_key = os.getenv('API_KEY') 
+    
     languages = ["Python", "Java", "JavaScript"]
 
     hh_results = {lang: calculate_average_salary(lang, get_hh_vacancies(lang), predict_rub_salary_hh) for lang in languages}
