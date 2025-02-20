@@ -1,1 +1,24 @@
+# Конфиденциальные данные
+.env
+
+# Виртуальное окружение
 .venv/
+
+# Python-кэш
+__pycache__/
+*.py[cod]
+
+# macOS системные файлы
+.DS_Store
+
+# Windows системные файлы
+thumbs.db
+desktop.ini
+
+# Логи и временные файлы
+*.log
+*.tmp
+
+# Настройки редакторов
+.vscode/
+.idea/

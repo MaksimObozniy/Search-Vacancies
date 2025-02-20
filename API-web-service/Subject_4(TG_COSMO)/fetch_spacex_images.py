@@ -2,9 +2,10 @@ import requests
 import os
 from utils_function.create_folder import create_folder
 
+
 def fetch_spacex_launch():
     
-    folder_name = "spacex_images"
+    folder_name = "Spacex_images"
     create_folder()
     
     default_value = "5eb87d46ffd86e000604b388"

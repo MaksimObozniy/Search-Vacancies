@@ -1,4 +1,3 @@
-
 from utils_function.get_api import get_api_key
 from utils_function.create_folder import create_folder
 import requests
@@ -17,7 +16,7 @@ def nasa_apod():
     response = requests.get(url_api, params=params)
     response.raise_for_status()
     
-    folder_name = "Apod Images"
+    folder_name = "Apod_images"
     create_folder()
     
     data_photo_day = response.json()

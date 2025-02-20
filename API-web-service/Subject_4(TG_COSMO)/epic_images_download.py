@@ -4,7 +4,6 @@ from utils_function.get_api import get_api_key
 from utils_function.create_folder import create_folder
 
 
-
 def download_nasaepic_photo():
     
     api_url = "https://api.nasa.gov/EPIC/api/natural/images"
@@ -15,7 +14,7 @@ def download_nasaepic_photo():
     response.raise_for_status()
     epic_data = response.json()
     
-    folder_name = "EPIC images"
+    folder_name = "EPIC_images"
     create_folder()
     
     for index, photo_data in enumerate(epic_data, start=1):
