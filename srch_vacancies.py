@@ -1,8 +1,10 @@
 import requests
+import os
 from terminaltables import AsciiTable
 
 
-API_KEY = 'api_key' 
+
+API_KEY = os.getenv('API_KEY') 
 
 
 def predict_rub_salary_hh(vacancy):
