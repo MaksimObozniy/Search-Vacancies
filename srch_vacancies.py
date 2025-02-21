@@ -126,12 +126,12 @@ def print_table(title, results):
 
 if __name__ == '__main__':
     load_dotenv()
-    api_key = os.getenv('API_KEY') 
+    api_key = os.getenv('SJ_API_KEY') 
     
     languages = ["Python", "Java", "JavaScript"]
 
-    hh_results = {lang: calculate_average_salary(lang, get_hh_vacancies(lang), predict_rub_salary_hh) for lang in languages}
-    sj_results = {lang: calculate_average_salary(lang, get_sj_vacancies(lang), predict_rub_salary_sj) for lang in languages}
+    hh_table = {lang: calculate_average_salary(lang, get_hh_vacancies(lang), predict_rub_salary_hh) for lang in languages}
+    sj_table = {lang: calculate_average_salary(lang, get_sj_vacancies(lang), predict_rub_salary_sj) for lang in languages}
 
-    print_table("HeadHunter Moscow", hh_results)
-    print_table("SuperJob Moscow", sj_results)
+    print_table("HeadHunter Moscow", hh_table)
+    print_table("SuperJob Moscow", sj_table)
