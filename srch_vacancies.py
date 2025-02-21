@@ -4,6 +4,17 @@ from dotenv import load_dotenv
 from terminaltables import AsciiTable
 
 
+def calculate_salary(salary_from, salary_to):
+
+    if salary_from and salary_to:
+        return (salary_from + salary_to) / 2
+    if salary_from:
+        return salary_from * 1.2
+    if salary_to:
+        return salary_to * 0.8
+    return None
+
+
 def predict_rub_salary_hh(vacancy):
     salary = vacancy.get("salary")
     if not salary or salary.get("currency") != "RUR":
@@ -12,14 +23,7 @@ def predict_rub_salary_hh(vacancy):
     salary_from = salary.get("from")
     salary_to = salary.get("to")
 
-    if salary_from and salary_to:
-        return (salary_from + salary_to) / 2
-    if salary_from:
-        return salary_from * 1.2
-    if salary_to:
-        return salary_to * 0.8
-
-    return None
+    return calculate_salary(salary_from, salary_to)
 
 
 def get_hh_vacancies(language):
@@ -58,14 +62,7 @@ def predict_rub_salary_sj(vacancy):
     if currency != "rub":
         return None
 
-    if payment_from and payment_to:
-        return (payment_from + payment_to) / 2
-    if payment_from:
-        return payment_from * 1.2
-    if payment_to:
-        return payment_to * 0.8
-
-    return None
+    return calculate_salary(payment_from, payment_to)
 
 
 def get_sj_vacancies(language):
