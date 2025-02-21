@@ -130,8 +130,15 @@ if __name__ == '__main__':
     
     languages = ["Python", "Java", "JavaScript"]
 
-    hh_table = {lang: calculate_average_salary(lang, get_hh_vacancies(lang), predict_rub_salary_hh) for lang in languages}
-    sj_table = {lang: calculate_average_salary(lang, get_sj_vacancies(lang), predict_rub_salary_sj) for lang in languages}
+    hh_salaries = {}
+    for lang in languages:
+        hh_vacancies = get_hh_vacancies(lang)
+        hh_salaries[lang] = calculate_average_salary(lang, hh_vacancies, predict_rub_salary_hh)
 
-    print_table("HeadHunter Moscow", hh_table)
-    print_table("SuperJob Moscow", sj_table)
+    sj_salaries = {}
+    for lang in languages:
+        sj_vacancies = get_sj_vacancies(lang)
+        sj_salaries[lang] = calculate_average_salary(lang, sj_vacancies, predict_rub_salary_sj)
+
+    print_table("HeadHunter Moscow", hh_salaries)
+    print_table("SuperJob Moscow", sj_salaries)
