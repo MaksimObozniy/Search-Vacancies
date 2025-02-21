@@ -4,6 +4,11 @@ from dotenv import load_dotenv
 from terminaltables import AsciiTable
 
 
+MOSCOW_ID_HH = 1
+MOSCOW_ID_SJ = 4
+PER_PAGE_VACANCIES = 100
+
+
 def calculate_salary(salary_from, salary_to):
 
     if salary_from and salary_to:
@@ -34,13 +39,13 @@ def get_hh_vacancies(language):
     while True:
         params = {
             "text": f"Программист {language}",
-            "area": 1,
-            "per_page": 100,
+            "area": MOSCOW_ID_HH,
+            "per_page": PER_PAGE_VACANCIES,
             "page": page
         }
 
         response = requests.get(url, params=params)
-        if response.status_code != 200:
+        if not response.ok:
             break
 
         vacancies = response.json().get("items", [])
@@ -74,13 +79,13 @@ def get_sj_vacancies(language):
     while True:
         params = {
             "keyword": f"Программист {language}",
-            "town": 4,
-            "count": 100,
+            "town": MOSCOW_ID_SJ,
+            "count": PER_PAGE_VACANCIES,
             "page": page
         }
 
         response = requests.get(url, headers=headers, params=params)
-        if response.status_code != 200:
+        if not response.ok:
             break
 
         vacancies = response.json()["objects"]
