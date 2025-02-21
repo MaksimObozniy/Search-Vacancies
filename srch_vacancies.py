@@ -96,8 +96,20 @@ def get_sj_vacancies(language):
     return all_vacancies
 
 
-def calculate_average_salary(language, vacancies, salary_func):
-    salaries = [salary_func(vacancy) for vacancy in vacancies if salary_func(vacancy)]
+def calculate_average_salary(vacancies, platform):
+    salaries = []
+    
+    for vacancy in vacancies:
+        if platform == 'hh':
+            salary = predict_rub_salary_hh(vacancy)
+        elif platform == 'sj':
+            salary = predict_rub_salary_sj(vacancy)
+        else:
+            raise ValueError("Неизвестная платформа")
+        
+        if salary:
+            salaries.append(salary)
+        
     average_salary = int(sum(salaries) / len(salaries)) if salaries else 0
 
     return {
@@ -133,12 +145,12 @@ if __name__ == '__main__':
     hh_salaries = {}
     for lang in languages:
         hh_vacancies = get_hh_vacancies(lang)
-        hh_salaries[lang] = calculate_average_salary(lang, hh_vacancies, predict_rub_salary_hh)
+        hh_salaries[lang] = calculate_average_salary(hh_vacancies, "hh")
 
     sj_salaries = {}
     for lang in languages:
         sj_vacancies = get_sj_vacancies(lang)
-        sj_salaries[lang] = calculate_average_salary(lang, sj_vacancies, predict_rub_salary_sj)
+        sj_salaries[lang] = calculate_average_salary(sj_vacancies, "sj")
 
     print_table("HeadHunter Moscow", hh_salaries)
     print_table("SuperJob Moscow", sj_salaries)
