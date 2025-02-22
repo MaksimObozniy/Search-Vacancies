@@ -71,7 +71,7 @@ def predict_rub_salary_sj(vacancy):
     return calculate_salary(payment_from, payment_to)
 
 
-def get_sj_vacancies(language):
+def get_sj_vacancies(language, api_key):
     url = "https://api.superjob.ru/2.0/vacancies/"
     headers = {"X-Api-App-Id": api_key}
     page = 0
@@ -153,7 +153,7 @@ if __name__ == '__main__':
 
     sj_salaries = {}
     for lang in languages:
-        sj_vacancies = get_sj_vacancies(lang)
+        sj_vacancies = get_sj_vacancies(lang, api_key)
         sj_salaries[lang] = calculate_average_salary(sj_vacancies, "sj")
 
     print_table("HeadHunter Moscow", hh_salaries)
