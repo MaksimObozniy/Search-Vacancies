@@ -48,7 +48,8 @@ def get_hh_vacancies(language):
         if not response.ok:
             break
 
-        vacancies = response.json().get("items", [])
+        vacancies_response = response.json()
+        vacancies = vacancies_response.get("items", [])
         all_vacancies.extend(vacancies)
 
         if page >= response.json()["pages"] - 1:
@@ -87,7 +88,8 @@ def get_sj_vacancies(language):
         response = requests.get(url, headers=headers, params=params)
         if not response.ok:
             break
-
+        
+        
         vacancies = response.json()["objects"]
         if not vacancies:
             break
