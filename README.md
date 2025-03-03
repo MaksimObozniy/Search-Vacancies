@@ -27,7 +27,7 @@
 ```.env
   API_KEY=Ваш_ключ
 ```
-
+Пример:
 ```example
 API_KEY=W4pspq4jifspw4jf9wjya.q8rt993
 ```
