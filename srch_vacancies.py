@@ -100,17 +100,20 @@ def get_sj_vacancies(language, api_key):
     return all_vacancies
 
 
+def predict_rub_salary(vacancy, platform):
+    if platform == 'hh':
+        return predict_rub_salary_hh(vacancy)
+    elif platform == 'sj':
+        return predict_rub_salary_sj(vacancy)
+    else:
+        raise ValueError("Неизвестная платформа")
+
+
 def calculate_average_salary(vacancies, platform):
     salaries = []
     
     for vacancy in vacancies:
-        if platform == 'hh':
-            salary = predict_rub_salary_hh(vacancy)
-        elif platform == 'sj':
-            salary = predict_rub_salary_sj(vacancy)
-        else:
-            raise ValueError("Неизвестная платформа")
-        
+        salary = predict_rub_salary(vacancy, platform)
         if salary:
             salaries.append(salary)
         
